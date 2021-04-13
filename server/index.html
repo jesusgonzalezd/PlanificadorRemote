@@ -10,7 +10,6 @@
             const socket = io();
             let counter = 0;
             socket.on('arduino:data', function (dataSerial){
-                console.log(dataSerial);
                 myChart.data.labels.push(counter);
                 myChart.data.datasets.forEach(dataset => {
                     dataset.data.push(dataSerial);
@@ -21,7 +20,7 @@
             });
         </script>
 
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.1.0/dist/chart.min.js"></script>
 
         <canvas id="myChart" width="400" height="400"></canvas>
         <script>
@@ -29,15 +28,29 @@
         var myChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ["Serial"],
+                labels: [],
                 datasets: [{
-                   label: "Serial",
-                   backgroundColor: 'rgb(52,73,94)',
-                   borderColor: 'rgb(41, 128, 185)',
+                   label: "Output",
+                   backgroundColor: 'transparent',
+                   borderColor: 'red',
+                   borderWidth: 0.5,
                    data: []
+                },
+                {
+                   label: "Output_2",
+                   backgroundColor: 'transparent',
+                   borderColor: 'blue',
+                   borderWidth: 0.5,
+                   data:[]
                 }]
             },
-            options: { }
+            options: { 
+                elements: {
+                    point: {
+                        radius: 0
+                    }
+                }
+             }
         });
         </script>
     </body>
