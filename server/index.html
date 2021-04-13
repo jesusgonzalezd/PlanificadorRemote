@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <script src="/socket.io/socket.io.js" charset="utf-8"></script>
+
+        <script>
+            const socket = io();
+            let counter = 0;
+            socket.on('arduino:data', function (dataSerial){
+                console.log(dataSerial);
+                myChart.data.labels.push(counter);
+                myChart.data.datasets.forEach(dataset => {
+                    dataset.data.push(dataSerial);
+                });
+
+                counter++;
+                myChart.update();
+            });
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <canvas id="myChart" width="400" height="400"></canvas>
+        <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ["Serial"],
+                datasets: [{
+                   label: "Serial",
+                   backgroundColor: 'rgb(52,73,94)',
+                   borderColor: 'rgb(41, 128, 185)',
+                   data: []
+                }]
+            },
+            options: { }
+        });
+        </script>
+    </body>
+</html>
