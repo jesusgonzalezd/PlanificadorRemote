@@ -9,7 +9,10 @@ const io = require('socket.io')(server);
 
 // Funcion para saber si un nuevo cliente se ha conectado.
 io.on('connection', function(socket){
-    console.log('Nuevo socket conectado');
+    console.log('Cliente conectado');
+    socket.on('disconnect', () =>{
+        console.log("Cliente desconectado.")
+    })
 });
 
 // Funcion para enviar una peticion http get al servidor con la vista index.
