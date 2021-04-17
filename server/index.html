@@ -1,66 +1,128 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+        <title>Arduino Dashboard</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" integrity="sha384-wESLQ85D6gbsF459vf1CiZ2+rr+CsxRY0RpiF1tLlQpDnAgg6rwdsUF1+Ics2bni" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
+        <div class="container">
+            <div class="navigation">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <span class="icon"></span>
+                            <span class="title"><h2>Lab. PDA</h2></span>
+                        </a>    
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="icon"><i class="fas fa-home"></i></span>
+                            <span class="title">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="icon"><i class="fa fa-history" aria-hidden="true"></i></span>
+                            <span class="title">Historial</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
 
-        <form id="form1">
-        <center>
-        <h1>Serial Plotter Arduino</h1>
-        </center>
-        <script src="/socket.io/socket.io.js" charset="utf-8"></script>
+            <div class="main">
 
-        <script>
-            const socket = io();
-            let counter = 0;
-            socket.on('arduino:data', function (dataSerial){
-                myChart.data.labels.push(counter);
-                myChart.data.datasets.forEach(dataset => {
-                    dataset.data.push(dataSerial);
-                });
+                <div class="topbar">
+                     <div class="toggle" onclick="toggleMenu();">
+                     </div>   
+                </div>
 
-                counter++;
-                myChart.update();
-            });
-        </script>
+                <div class="cardBox">
+                    <div class="card">
+                        <div>
+                            <div class="temp">85 C</div>
+                            <div class="cardName">Temperatura</div>
+                        </div>
+                        <div class="iconBox">
+                            <i class="fas fa-temperature-low"></i>
+                        </div>
+                    </div>
+                </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.1.0/dist/chart.min.js"></script>
+                <div class="graph1">
+                        <form id="form1">
+                         <script src="/socket.io/socket.io.js" charset="utf-8"></script>
 
-        <canvas id="myChart" width="800" height="400"></canvas>
-        <script>
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: [],
-                datasets: [{
-                   label: "Output",
-                   backgroundColor: 'transparent',
-                   borderColor: 'red',
-                   borderWidth: 0.5,
-                   data: []
-                },
-                {
-                   label: "Output_2",
-                   backgroundColor: 'transparent',
-                   borderColor: 'blue',
-                   borderWidth: 0.5,
-                   data:[]
-                }]
-            },
-            options: { 
-               responsive: false,
-               elements: {
-                    point: {
-                        radius: 0
-                    }
-                }
-             }
-        });
+                        <script>
+                            const socket = io();
+                            let counter = 0;
+                            socket.on('arduino:data', function (dataSerial){
+                                myChart.data.labels.push(counter);
+                                myChart.data.datasets.forEach(dataset => {
+                                    dataset.data.push(dataSerial);
+                                });
+
+                                counter++;
+                                myChart.update();
+                            });
+                        </script>
+
+                        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.1.0/dist/chart.min.js"></script>
+
+                        <canvas id="myChart" width="800" height="400"></canvas>
+                        <script>
+                        var ctx = document.getElementById('myChart').getContext('2d');
+                        var myChart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: [],
+                                datasets: [{
+                                label: "Output",
+                                backgroundColor: 'transparent',
+                                borderColor: 'red',
+                                borderWidth: 0.5,
+                                data: []
+                                },
+                                {
+                                label: "Output_2",
+                                backgroundColor: 'transparent',
+                                borderColor: 'blue',
+                                borderWidth: 0.5,
+                                data:[]
+                                }]
+                            },
+                            options: { 
+                            responsive: false,
+                            elements: {
+                                    point: {
+                                        radius: 0
+                                    }
+                                }
+                            }
+                        });
+                        
+                    </script>
+                    
         
-        </script>
-        <hr />
-        </form>
+                    </form>
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <script>
+            function toggleMenu(){
+                let toggle = document.querySelector('.toggle');
+                let navigation = document.querySelector('.navigation');
+                let main = document.querySelector('.main');
+                
+                toggle.classList.toggle('active');
+                navigation.classList.toggle('active');
+                main.classList.toggle('active');
+            } 
+        </script> 
     </body>
 </html>
