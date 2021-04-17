@@ -2,6 +2,7 @@
 const http = require('http');
 const express = require('express');
 const socketIO = require('socket.io');
+const db = require('../database/firebaseConfig');
 
 const app = express();
 const server = http.createServer(app);
@@ -41,7 +42,12 @@ parser.on('open', function(){
 
 // Obtiene datos de las salidas del arduino.
 parser.on('data', function(data) {
-    console.log(data);
+    db.push({
+        output:data.toString(),
+        output_2:data.toString(),
+        temperatura: 35,
+    });
+
     io.emit('arduino:data', data);
 });
 

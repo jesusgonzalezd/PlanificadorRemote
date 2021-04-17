@@ -10,11 +10,15 @@ firebase.initializeApp({
     appId: "1:480217596214:web:9196170f9b12953736b397"
 });
 
-var db = firebase.database().ref("/user_data");
+/*const db = firebase.database().ref("/user_data");
 
 db.push({
-    id:29,
+    id:22,
     name:"Jane Doe",
     email:"jane@doe.com",
     website:"https://jane.foo.bar"
-});
+});*/
+
+var db = firebase.database().ref("/salidas");
+
+module.exports = db;
