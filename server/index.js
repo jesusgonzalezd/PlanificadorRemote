@@ -13,6 +13,9 @@ io.on('connection', function(socket){
     console.log('Nuevo socket conectado');
 });
 
+//Función para añadir recursos
+app.use(express.static(__dirname+'/'));
+
 // Funcion para enviar una peticion http get al servidor con la vista index.
 app.get('/', (req, res) =>{ 
     res.sendFile(__dirname + '/index.html');
@@ -55,3 +58,4 @@ parser.on('data', function(data) {
 port.on('error', function(err){
     console.log(err);
 });
+
