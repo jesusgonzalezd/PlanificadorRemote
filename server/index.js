@@ -18,7 +18,7 @@ app.use(express.static(__dirname+'/'));
 
 // Funcion para enviar una peticion http get al servidor con la vista index.
 app.get('/', (req, res) =>{ 
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(__dirname + '/graph_2.html');
 });
 
 // Funcion de escucha del servidor en port 3000.
@@ -43,15 +43,26 @@ parser.on('open', function(){
     console.log("Conexion abierta");
 });
 
-// Obtiene datos de las salidas del arduino.
-parser.on('data', function(data) {
-    db.push({
-        output:data.toString(),
-        output_2:data.toString(),
-        temperatura: 35,
-    });
+var flag = true;
 
-    io.emit('arduino:data', data);
+parser.on('data', function(data) {
+
+    if(flag){
+        data = data.slice(0, 0).concat(data.slice(1, data.length));
+        flag = false;
+    }
+
+    var time = new Date();
+
+    db.ref("arduinoMonitoreo").push({
+        output: JSON.parse(data).output,
+        output_2: JSON.parse(data).output_2,
+        temperatura: JSON.parse(data).temperature,
+        fecha: time.getDay() + "/" + time.getMonth() + "/" + time.getFullYear(), 
+        tiempo: time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds()
+    });
+    
+    //io.emit('arduino:data', data);
 });
 
 //Captura errores de lectura en puerto del arduino.
