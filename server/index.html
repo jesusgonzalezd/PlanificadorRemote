@@ -3,7 +3,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
         <title>Arduino Dashboard</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" integrity="sha384-wESLQ85D6gbsF459vf1CiZ2+rr+CsxRY0RpiF1tLlQpDnAgg6rwdsUF1+Ics2bni" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
@@ -18,7 +18,7 @@
                     </li>
                     <li>
                         <a href="#">
-                            <span class="icon"><i class="fas fa-home"></i></span>
+                            <span class="icon"><i class="fa fa-home" aria-hidden="true"></i></span>
                             <span class="title">Dashboard</span>
                         </a>
                     </li>
@@ -41,72 +41,155 @@
                 <div class="cardBox">
                     <div class="card">
                         <div>
-                            <div class="temp">85 C</div>
+                            <div class="numbers">valor</div>
                             <div class="cardName">Temperatura</div>
+                        </div>
+                        <div class="iconBox">
+                            <i class="fa fa-thermometer-empty" aria-hidden="true"></i>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div>
+                            <div class="numbers">valor</div>
+                            <div class="cardName">Variable 2</div>
                         </div>
                         <div class="iconBox">
                             <i class="fas fa-temperature-low"></i>
                         </div>
                     </div>
+
+                    <div class="card">
+                        <div>
+                            <div class="numbers">valor</div>
+                            <div class="cardName">Variable 3</div>
+                        </div>
+                        <div class="iconBox">
+                            <i class="fas fa-temperature-low"></i>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div>
+                            <div class="numbers">valor </div>
+                            <div class="cardName">Variable 4</div>
+                        </div>
+                        <div class="iconBox">
+                            <i class="fas fa-temperature-low"></i>
+                        </div>
+                    </div>
+
                 </div>
 
-                <div class="graph1">
-                        <form id="form1">
-                         <script src="/socket.io/socket.io.js" charset="utf-8"></script>
+                <div class="details">
 
-                        <script>
-                            const socket = io();
-                            let counter = 0;
-                            socket.on('arduino:data', function (dataSerial){
-                                myChart.data.labels.push(counter);
-                                myChart.data.datasets.forEach(dataset => {
-                                    dataset.data.push(dataSerial);
+                    <div class="liveExecution">
+                        <div class="cardHeader">
+                            <h2>Ejecución Live</h2>
+                        </div> 
+                        <div class="graph1">
+                            <form id="form1">
+                             <script src="/socket.io/socket.io.js" charset="utf-8"></script>
+    
+                            <script>
+                                const socket = io();
+                                let counter = 0;
+                                socket.on('arduino:data', function (dataSerial){
+                                    myChart.data.labels.push(counter);
+                                    myChart.data.datasets.forEach(dataset => {
+                                        dataset.data.push(dataSerial);
+                                    });
+    
+                                    counter++;
+                                    myChart.update();
                                 });
-
-                                counter++;
-                                myChart.update();
-                            });
-                        </script>
-
-                        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.1.0/dist/chart.min.js"></script>
-
-                        <canvas id="myChart" width="800" height="400"></canvas>
-                        <script>
-                        var ctx = document.getElementById('myChart').getContext('2d');
-                        var myChart = new Chart(ctx, {
-                            type: 'line',
-                            data: {
-                                labels: [],
-                                datasets: [{
-                                label: "Output",
-                                backgroundColor: 'transparent',
-                                borderColor: 'red',
-                                borderWidth: 0.5,
-                                data: []
+                            </script>
+    
+                            <script src="https://cdn.jsdelivr.net/npm/chart.js@3.1.0/dist/chart.min.js"></script>
+    
+                            <canvas id="myChart" width="800" height="400"></canvas>
+                            <script>
+                            var ctx = document.getElementById('myChart').getContext('2d');
+                            var myChart = new Chart(ctx, {
+                                type: 'line',
+                                data: {
+                                    labels: [],
+                                    datasets: [{
+                                    label: "Output",
+                                    backgroundColor: 'transparent',
+                                    borderColor: 'red',
+                                    borderWidth: 0.5,
+                                    data: []
+                                    },
+                                    {
+                                    label: "Output_2",
+                                    backgroundColor: 'transparent',
+                                    borderColor: 'blue',
+                                    borderWidth: 0.5,
+                                    data:[]
+                                    }]
                                 },
-                                {
-                                label: "Output_2",
-                                backgroundColor: 'transparent',
-                                borderColor: 'blue',
-                                borderWidth: 0.5,
-                                data:[]
-                                }]
-                            },
-                            options: { 
-                            responsive: false,
-                            elements: {
-                                    point: {
-                                        radius: 0
+                                options: { 
+                                responsive: false,
+                                elements: {
+                                        point: {
+                                            radius: 0
+                                        }
                                     }
                                 }
-                            }
-                        });
+                            });
+                            
+                        </script>
                         
-                    </script>
-                    
-        
-                    </form>
+            
+                        </form>
+                    </div>                        
+                    </div>
+
+
+                    <div class="remoteControl">
+                        <div class="cardHeader">
+                            <h2>Control remoto</h2>                            
+                        </div>
+
+                    </div>
+
+                    <div class="recentsExecutions">
+                        <div class="cardHeader">
+                            <h2>Ejecuciones recientes</h2>
+                            <a href="#" class="btn">Ver todos</a>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Fecha</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <!--<td><span class="fecha"></span></td> preguntar a los chicos-->
+                                    <td>AQUÍ  FECHA</td>                                    
+                                </tr>
+                                <tr>                                   
+                                    <td>AQUÍ  FECHA</td>                                    
+                                </tr>
+                                <tr>                                   
+                                    <td>AQUÍ  FECHA</td>                                    
+                                </tr>
+                                <tr>                                   
+                                    <td>AQUÍ FECHA</td>                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                   
+
+
                 </div>
+
+                
 
 
             </div>
