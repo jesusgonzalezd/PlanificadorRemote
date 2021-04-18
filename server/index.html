@@ -59,7 +59,6 @@
                         </div>
                     </div>
 
-<<<<<<< Updated upstream
                     <div class="card">
                         <div>
                             <div class="numbers">valor</div>
@@ -69,21 +68,6 @@
                             <i class="fas fa-temperature-low"></i>
                         </div>
                     </div>
-=======
-                <div class="graph1">
-                        <form id="form1">
-                         <script src="/socket.io/socket.io.js" charset="utf-8"></script>
-
-                        <script>
-                            const socket = io();
-                            let counter = 0;
-
-                            socket.on('arduino:data', function (dataSerial){
-                                myChart.data.labels.push(counter);
-                                myChart.data.datasets.forEach(dataset => {
-                                    dataset.data.push(JSON.parse(dataSerial).output);
-                                });
->>>>>>> Stashed changes
 
                     <div class="card">
                         <div>
