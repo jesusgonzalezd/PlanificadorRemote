@@ -5,7 +5,10 @@
         <title>Arduino Dashboard</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
         <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
     </head>
     <body>
         <div class="container">
@@ -166,12 +169,14 @@
 
                             firebase.initializeApp(config);
 
+                            //Función para llenar las tarjetas de valores
                             firebase.database().ref("arduinoMonitoreo").orderByKey()
                             .on('child_added', function(snapshot) {
                                 var snap = snapshot.val();
                                 counter += 1;
                                 addData(myChart, counter, snap.output, snap.output_2, snap.temperatura); 
-                                changePanel(snap.output, snap.output_2, snap.temperatura);                       
+                                changePanel(snap.output, snap.output_2, snap.temperatura);
+                                addToTable(snap.output,snap.output_2, snap.temperatura);                       
                             });
 
                             function changePanel(output, output_2, temp) {
@@ -180,6 +185,16 @@
                                 document.getElementById('temp').innerHTML = temp.toString() + " C";
                             }
 
+                            $(window).load(function(){
+                               addToTable();
+                            });
+                              
+                            var cont = 0;
+                            function addToTable(output, output_2, temp){
+                                cont++;
+                                var fila='<tr id= "fila'+cont+'"><td>'+output+'</td><td>'+output_2+'</td><td>'+temp+'</td></tr>';
+                                $('#historialVariableTable').append(fila);
+                            }
                         </script>
                         
                         </form>
@@ -193,6 +208,25 @@
                         </div>
 
                     </div>
+
+
+                    <div class="historialVariables">
+                        <div class="cardHeader">
+                            <h2>Registro de variables</h2>                            
+                        </div>
+                        <table id="historialVariableTable" class="historialT"> 
+                            <thead>
+                                <tr>
+                                    <td>Output</td>                                                              
+                                    <td>Output 2</td>                                
+                                    <td>Temperatura</td>
+                                </tr>
+                            </thead>
+                            
+                        </table>
+                    </div>
+
+
 
                     <div class="recentsExecutions">
                         <div class="cardHeader">
@@ -215,6 +249,27 @@
                                 </tr>
                                 <tr>                                   
                                     <td>AQUÍ  FECHA</td>                                    
+                                </tr>
+                                <tr>                                   
+                                    <td>AQUÍ FECHA</td>                                    
+                                </tr>
+                                <tr>                                   
+                                    <td>AQUÍ FECHA</td>                                    
+                                </tr>
+                                <tr>                                   
+                                    <td>AQUÍ FECHA</td>                                    
+                                </tr>
+                                <tr>                                   
+                                    <td>AQUÍ FECHA</td>                                    
+                                </tr>
+                                <tr>                                   
+                                    <td>AQUÍ FECHA</td>                                    
+                                </tr>
+                                <tr>                                   
+                                    <td>AQUÍ FECHA</td>                                    
+                                </tr>
+                                <tr>                                   
+                                    <td>AQUÍ FECHA</td>                                    
                                 </tr>
                                 <tr>                                   
                                     <td>AQUÍ FECHA</td>                                    

@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
-*
-{
+
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -155,6 +155,11 @@ body{
     min-height: 530px;
     background: #fff;
     padding: 20px;
+    
+}
+.details .liveExecution .graph1{
+    position: relative;
+    padding: 10px 10px;
 }
 .details .recentsExecutions{
     position: relative;
@@ -163,6 +168,7 @@ body{
     min-height: 400px;
     background: #fff;
     padding: 20px;
+    
 }
 .cardHeader{
     display: flex;
@@ -217,4 +223,3 @@ body{
     background: #fff;
     padding: 20px;
 }
-
