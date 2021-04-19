@@ -18,7 +18,7 @@ app.use(express.static(__dirname+'/'));
 
 // Funcion para enviar una peticion http get al servidor con la vista index.
 app.get('/', (req, res) =>{ 
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(__dirname + '/graph_2.html');
 });
 
 // Funcion de escucha del servidor en port 3000.
@@ -54,13 +54,13 @@ parser.on('data', function(data) {
 
     var time = new Date();
 
-    /*db.ref("arduinoMonitoreo").push({
+    db.ref("arduinoMonitoreo").push({
         output: JSON.parse(data).output,
         output_2: JSON.parse(data).output_2,
         temperatura: JSON.parse(data).temperature,
         fecha: time.getDay() + "/" + time.getMonth() + "/" + time.getFullYear(), 
         tiempo: time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds()
-    });*/
+    });
     
     //io.emit('arduino:data', data);
 });

@@ -5,6 +5,7 @@
         <title>Arduino Dashboard</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase.js"></script>
     </head>
     <body>
         <div class="container">
@@ -41,7 +42,7 @@
                 <div class="cardBox">
                     <div class="card">
                         <div>
-                            <div class="numbers">valor</div>
+                            <div class="numbers" id="temp"></div>
                             <div class="cardName">Temperatura</div>
                         </div>
                         <div class="iconBox">
@@ -51,8 +52,8 @@
 
                     <div class="card">
                         <div>
-                            <div class="numbers">valor</div>
-                            <div class="cardName">Variable 2</div>
+                            <div class="numbers" id="output"></div>
+                            <div class="cardName">Salida Planta 1</div>
                         </div>
                         <div class="iconBox">
                             <i class="fas fa-temperature-low"></i>
@@ -61,8 +62,8 @@
 
                     <div class="card">
                         <div>
-                            <div class="numbers">valor</div>
-                            <div class="cardName">Variable 3</div>
+                            <div class="numbers" id="output_2"></div>
+                            <div class="cardName">Salida Planta 2</div>
                         </div>
                         <div class="iconBox">
                             <i class="fas fa-temperature-low"></i>
@@ -92,7 +93,7 @@
                              <script src="/socket.io/socket.io.js" charset="utf-8"></script>
     
                             <script>
-                                const socket = io();
+                                /*const socket = io();
                                 let counter = 0;
                                 socket.on('arduino:data', function (dataSerial){
                                     myChart.data.labels.push(counter);
@@ -102,46 +103,85 @@
     
                                     counter++;
                                     myChart.update();
-                                });
+                                });*/
                             </script>
     
                             <script src="https://cdn.jsdelivr.net/npm/chart.js@3.1.0/dist/chart.min.js"></script>
-    
                             <canvas id="myChart" width="800" height="400"></canvas>
                             <script>
                             var ctx = document.getElementById('myChart').getContext('2d');
                             var myChart = new Chart(ctx, {
                                 type: 'line',
-                                data: {
-                                    labels: [],
-                                    datasets: [{
-                                    label: "Output",
-                                    backgroundColor: 'transparent',
-                                    borderColor: 'red',
-                                    borderWidth: 0.5,
-                                    data: []
-                                    },
-                                    {
-                                    label: "Output_2",
-                                    backgroundColor: 'transparent',
-                                    borderColor: 'blue',
-                                    borderWidth: 0.5,
-                                    data:[]
-                                    }]
+                                data: { labels: [],
+                                        datasets: [{
+                                        label: "Salida Planta 1",
+                                        backgroundColor: 'transparent',
+                                        borderColor: 'red',
+                                        borderWidth: 0.5,
+                                        data: []
+                                        },
+                                        {
+                                        label: "Salida Planta 2",
+                                        backgroundColor: 'transparent',
+                                        borderColor: 'blue',
+                                        borderWidth: 0.5,
+                                        data: []
+                                        },
+                                        {
+                                        label: "Temperatura",
+                                        backgroundColor: 'transparent',
+                                        borderColor: 'green',
+                                        borderWidth: 0.5,
+                                        data: []
+                                        }
+                                        ]
                                 },
                                 options: { 
-                                responsive: false,
-                                elements: {
-                                        point: {
-                                            radius: 0
-                                        }
-                                    }
+                                        scales: { yAxes: [{ ticks: { beginAtZero: true } }] }, responsive: true, elements: { point: { radius: 0 } }
                                 }
                             });
-                            
+
+                            var counter = 0;
+
+                            function addData(chart, counter, output, output_2, temp) {
+                                chart.data.labels.push(counter);
+
+                                chart.data.datasets[0].data.push(output);
+                                chart.data.datasets[1].data.push(output_2);
+                                chart.data.datasets[2].data.push(temp);
+
+                                chart.update();
+                            }
+
+                            // Database Firebase
+                            var config = {
+                                apiKey: "AIzaSyCf6czF2GO0tlml2fIWHaLfJiuJ1VD1PW4",
+                                authDomain: "planificadordatabase.firebaseapp.com",
+                                databaseURL: "https://planificadordatabase-default-rtdb.firebaseio.com",
+                                projectId: "planificadordatabase",
+                                storageBucket: "planificadordatabase.appspot.com",
+                                messagingSenderId: "480217596214",
+                                appId: "1:480217596214:web:9196170f9b12953736b397"
+                            };
+
+                            firebase.initializeApp(config);
+
+                            firebase.database().ref("arduinoMonitoreo").orderByKey()
+                            .on('child_added', function(snapshot) {
+                                var snap = snapshot.val();
+                                counter += 1;
+                                addData(myChart, counter, snap.output, snap.output_2, snap.temperatura); 
+                                changePanel(snap.output, snap.output_2, snap.temperatura);                       
+                            });
+
+                            function changePanel(output, output_2, temp) {
+                                document.getElementById('output').innerHTML = output.toString();
+                                document.getElementById('output_2').innerHTML = output_2.toString();
+                                document.getElementById('temp').innerHTML = temp.toString() + " C";
+                            }
+
                         </script>
                         
-            
                         </form>
                     </div>                        
                     </div>
