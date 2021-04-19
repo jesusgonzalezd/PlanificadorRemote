@@ -18,7 +18,7 @@ app.use(express.static(__dirname+'/'));
 
 // Funcion para enviar una peticion http get al servidor con la vista index.
 app.get('/', (req, res) =>{ 
-    res.sendFile(__dirname + '/graph_2.html');
+    res.sendFile(__dirname + '/index.html');
 });
 
 // Funcion de escucha del servidor en port 3000.
