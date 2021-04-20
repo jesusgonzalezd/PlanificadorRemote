@@ -164,7 +164,6 @@ body{
 .details .recentsExecutions{
     position: relative;
     display: grid;
-    width: 60%;
     min-height: 400px;
     background: #fff;
     padding: 20px;
@@ -185,7 +184,10 @@ body{
     color: #fff;
     text-decoration: none;
     border-radius: 6px;
-}
+}/*
+.details .historialT{
+    position: relative;
+} */
 .details table
 {
     width: 100%;
@@ -215,11 +217,11 @@ body{
 .details .recentsExecutions table tbody tr td:last-child{
     text-align: left;
 }
-
+/*
 .details .remoteControl{
     position: relative;
     display: grid;
     min-height: 530px;
     background: #fff;
     padding: 20px;
-}
+}*/
