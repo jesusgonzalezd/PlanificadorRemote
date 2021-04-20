@@ -49,6 +49,8 @@
                         <div>
                             <div class="numbers" id="temp"></div>
                             <div class="cardName">Temperatura</div>
+                            <div class="averageNumber" id="averageTemp"></div>
+                            <div class="averageName">Promedio</div>
                         </div>
                         <div class="iconBox">
                             <i class="fa fa-thermometer-empty" aria-hidden="true"></i>
@@ -59,9 +61,11 @@
                         <div>
                             <div class="numbers" id="output"></div>
                             <div class="cardName">Salida Planta 1</div>
+                            <div class="averageNumber" id="averageOutput"></div>
+                            <div class="averageName">Promedio</div>
                         </div>
                         <div class="iconBox">
-                            <i class="fas fa-temperature-low"></i>
+                            <i class="fa fa-signal" aria-hidden="true"></i>
                         </div>
                     </div>
 
@@ -69,9 +73,11 @@
                         <div>
                             <div class="numbers" id="output_2"></div>
                             <div class="cardName">Salida Planta 2</div>
+                            <div class="averageNumber" id="averageOutput_2"></div>
+                            <div class="averageName">Promedio</div>
                         </div>
                         <div class="iconBox">
-                            <i class="fas fa-temperature-low"></i>
+                            <i class="fa fa-signal" aria-hidden="true"></i> 
                         </div>
                     </div>
 
@@ -81,9 +87,12 @@
                             <div class="cardName">Tiempo</div>
                         </div>
                         <div class="iconBox">
-                            <i class="fas fa-temperature-low"></i>
+                            <i class="fa fa-clock-o" aria-hidden="true"></i>
                         </div>
                     </div>
+
+                    
+
 
                 </div>
 
@@ -172,21 +181,34 @@
 
                             firebase.initializeApp(config);
 
+                            var averageTemp = 0, averageOutput = 0, averageOutput_2 = 0;                                                  
+                            
+
                             //Función para llenar las tarjetas de valores
                             firebase.database().ref("arduinoMonitoreo").orderByKey()
                             .on('child_added', function(snapshot) {
                                 var snap = snapshot.val();
                                 counter += 1;
+                                
+                                averageTemp += snap.temperatura;
+                                averageOutput +=  snap.output;
+                                averageOutput_2 += snap.output_2;                            
+                                
+
                                 addData(myChart, counter, snap.output, snap.output_2, snap.temperatura); 
-                                changePanel(snap.output, snap.output_2, snap.temperatura, snap.tiempo);
-                                addToTable(snap.output,snap.output_2, snap.temperatura, snap.fecha, snap.tiempo);                       
+                                changePanel(snap.output, snap.output_2, snap.temperatura, snap.tiempo, averageTemp/counter, averageOutput/counter, averageOutput_2/counter);
+                                addToTable(snap.output,snap.output_2, snap.temperatura, snap.fecha, snap.tiempo);
+                                                                                               
                             });
 
-                            function changePanel(output, output_2, temp, tiempo) {
+                            function changePanel(output, output_2, temp, tiempo, averageTemp, averageOutput, averageOutput_2) {
                                 document.getElementById('output').innerHTML = output.toString();
+                                document.getElementById('averageOutput').innerHTML = averageOutput.toString();
                                 document.getElementById('output_2').innerHTML = output_2.toString();
+                                document.getElementById('averageOutput_2').innerHTML = averageOutput_2.toString();
                                 document.getElementById('temp').innerHTML = temp.toString() + " C";
-                                document.getElementById('tiempo').innerHTML = tiempo.toString();
+                                document.getElementById('averageTemp').innerHTML = averageTemp.toString() + " C";
+                                document.getElementById('tiempo').innerHTML = tiempo.toString();                                
                             }
 
                             $(window).load(function(){
