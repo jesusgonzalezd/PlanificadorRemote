@@ -77,8 +77,8 @@
 
                     <div class="card">
                         <div>
-                            <div class="numbers">valor </div>
-                            <div class="cardName">Variable 4</div>
+                            <div class="numbers" id="tiempo"></div>
+                            <div class="cardName">Tiempo</div>
                         </div>
                         <div class="iconBox">
                             <i class="fas fa-temperature-low"></i>
@@ -113,7 +113,7 @@
                             </script>
     
                             <script src="https://cdn.jsdelivr.net/npm/chart.js@3.1.0/dist/chart.min.js"></script>
-                            <canvas id="myChart" width="800" height="400"></canvas>
+                            <canvas id="myChart" width="700" height="400"></canvas>
                             <script>
                             var ctx = document.getElementById('myChart').getContext('2d');
                             var myChart = new Chart(ctx, {
@@ -178,14 +178,15 @@
                                 var snap = snapshot.val();
                                 counter += 1;
                                 addData(myChart, counter, snap.output, snap.output_2, snap.temperatura); 
-                                changePanel(snap.output, snap.output_2, snap.temperatura);
-                                addToTable(snap.output,snap.output_2, snap.temperatura);                       
+                                changePanel(snap.output, snap.output_2, snap.temperatura, snap.tiempo);
+                                addToTable(snap.output,snap.output_2, snap.temperatura, snap.fecha, snap.tiempo);                       
                             });
 
-                            function changePanel(output, output_2, temp) {
+                            function changePanel(output, output_2, temp, tiempo) {
                                 document.getElementById('output').innerHTML = output.toString();
                                 document.getElementById('output_2').innerHTML = output_2.toString();
                                 document.getElementById('temp').innerHTML = temp.toString() + " C";
+                                document.getElementById('tiempo').innerHTML = tiempo.toString();
                             }
 
                             $(window).load(function(){
@@ -193,11 +194,13 @@
                             });
                               
                             var cont = 0;
-                            function addToTable(output, output_2, temp){
+                            var body = '<tbody>';
+                            function addToTable(output, output_2, temp, fecha, tiempo){
                                 cont++;
-                                var fila='<tr id= "fila'+cont+'"><td>'+output+'</td><td>'+output_2+'</td><td>'+temp+'</td></tr>';
+                                var fila='<tr id= "fila'+cont+'"><td>'+output+'</td><td>'+output_2+'</td><td>'+temp+'</td><td>'+fecha+'</td><td>'+tiempo+'</td></tr>';
                                 $('#historialVariableTable').append(fila);
                             }
+                            va
                         </script>
                         
                         </form>
@@ -213,7 +216,7 @@
                     </div>
 
  
-                    <div class="historialVariables">
+                    <div class="historialVariables" style="overflow-y:auto;">
                         <div class="cardHeader">
                             <h2>Registro de variables</h2>                            
                         </div>
@@ -223,6 +226,8 @@
                                     <td>Output</td>                                                              
                                     <td>Output 2</td>                                
                                     <td>Temperatura</td>
+                                    <td>Fecha</td>                                
+                                    <td>Tiempo</td>
                                 </tr>
                             </thead>
                             
@@ -233,7 +238,7 @@
 
                     <div class="recentsExecutions">
                         <div class="cardHeader">
-                            <h2>Ejecuciones recientes</h2>
+                            <h2>Recientes</h2>
                             <a href="#" class="btn">Ver todos</a>
                         </div>
                         <table>
