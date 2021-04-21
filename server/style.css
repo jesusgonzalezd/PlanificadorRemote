@@ -244,17 +244,18 @@ body{
 .details .recentsExecutions table tr td{
     padding: 5px 5px;
 }
-.details .recentsExecutions table tbody tr td:last-child{
+/*.details .recentsExecutions table tbody tr td:last-child{
     text-align: left;
-}
+}*/
 
 .details .historialVariables{
     background: #fff;
     padding: 20px;
     width: 60%;
+    overflow: hidden;
 }
 .details .historialT{
-    position: relative;
+    position: center;
     margin-top: 50px;
     padding: 20px;    
 }
@@ -266,6 +267,7 @@ body{
     background: #fff;
     padding: 20px;
 }
+
 button{
     position: relative;
     padding: 10px, 20px;
@@ -284,4 +286,15 @@ button{
     border:black;
     border-width: 0.5em;
     color:black;
+}
+
+.scrollContent{
+    display: block;
+    overflow-y: auto;
+    width: 100%;
+    height: 450px;
+}
+
+.fixedHeader{
+    display: block;
 }
