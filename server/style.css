@@ -265,7 +265,6 @@ body{
 .details .historialT{
     position: center;
     margin-top: 50px;
-    padding: 20px;    
 }
 .details .historialVariables table{
     margin-top: 50px;
@@ -332,4 +331,9 @@ button{
 .fixedHeader{
     display: block;
     
+}
+
+.paddingBetweenCols td
+{
+    padding:0 10px;
 }

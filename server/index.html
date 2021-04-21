@@ -223,7 +223,7 @@
                             var cont = 0;                            
                             function addToTable(output, output_2, temp, fecha, tiempo){
                                 cont++;
-                                var fila='<tr id= "fila'+cont+'"><td>'+output+'</td><td>'+output_2+'</td><td>'+temp+'</td><td>'+fecha+'</td><td>'+tiempo+'</td></tr>';
+                                var fila='<tr id= "fila'+cont+'" class= "paddingBetweenCols"><td>'+output+'</td><td>'+output_2+'</td><td>'+temp+'</td><td>'+fecha+'</td><td>'+tiempo+'</td></tr>';
                                 $('#historialVariableTable').append(fila);
                             }
                             va
@@ -253,7 +253,7 @@
                         </div>
                         <table id="historialVariableTable" class="historialT" style="overflow-y:auto;"> 
                             <thead class="fixedHeader">
-                                <tr>
+                                <tr class="paddingBetweenCols">
                                     <td>Output</td>                                                              
                                     <td>Output 2</td>                                
                                     <td>Temperatura</td>
@@ -261,8 +261,13 @@
                                     <td>Tiempo</td>
                                 </tr>
                             </thead>
+<<<<<<< Updated upstream
                             <tbody class="scrollContent" style="overflow-y:auto;">
                       
+=======
+                            <tbody class="scrollContent">
+                                
+>>>>>>> Stashed changes
                             </tbody>
                         </table>
                     </div>
