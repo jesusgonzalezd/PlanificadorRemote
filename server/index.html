@@ -17,6 +17,7 @@
     </head>
     <body>
         <div class="container">
+            <!--
             <div class="navigation">
                 <ul>
                     <li>
@@ -38,13 +39,14 @@
                         </a>
                     </li>
                 </ul>
-            </div>
+            </div>-->
 
             <div class="main">
 
                 <div class="topbar">
-                     <div class="toggle" onclick="toggleMenu();">
-                     </div>   
+                     <!--<div class="toggle" onclick="toggleMenu();"> -->
+                        <span class="title"><h2>Lab. PDA</h2></span>
+                       
                 </div>
 
                 <div class="cardBox">
@@ -218,8 +220,7 @@
                                addToTable();
                             });
                               
-                            var cont = 0;
-                            var body = '<tbody>';
+                            var cont = 0;                            
                             function addToTable(output, output_2, temp, fecha, tiempo){
                                 cont++;
                                 var fila='<tr id= "fila'+cont+'"><td>'+output+'</td><td>'+output_2+'</td><td>'+temp+'</td><td>'+fecha+'</td><td>'+tiempo+'</td></tr>';
@@ -246,11 +247,11 @@
                     </div>
 
  
-                    <div class="historialVariables"> 
+                    <div class="historialVariables" style="overflow-y:auto;"> 
                         <div class="cardHeader">
                             <h2>Registro de variables</h2>                            
                         </div>
-                        <table id="historialVariableTable" class="historialT"> 
+                        <table id="historialVariableTable" class="historialT" style="overflow-y:auto;"> 
                             <thead class="fixedHeader">
                                 <tr>
                                     <td>Output</td>                                                              
@@ -260,128 +261,14 @@
                                     <td>Tiempo</td>
                                 </tr>
                             </thead>
-                            <tbody class="scrollContent">
-                                <tr>
-                                    <td>Cell Content 1</td>
-                                    <td>Cell Content 2</td>
-                                    <td>Cell Content 3</td>
-<td>Cell Content 4</td>
-<td>Cell Content 5</td>
-
-                                </tr> 
-                                <tr>
-                                    <td>Cell Content 1</td>
-                                    <td>Cell Content 2</td>
-                                    <td>Cell Content 3</td>
-<td>Cell Content 4</td>
-<td>Cell Content 5</td>
-                                </tr> 
-                                <tr>
-                                    <td>Cell Content 1</td>
-                                    <td>Cell Content 2</td>
-                                    <td>Cell Content 3</td>
-<td>Cell Content 4</td>
-<td>Cell Content 5</td>
-
-                                </tr> 
-                                <tr>
-                                    <td>Cell Content 1</td>
-                                    <td>Cell Content 2</td>
-                                    <td>Cell Content 3</td>
-<td>Cell Content 4</td>
-<td>Cell Content 5</td>
-
-                                </tr> 
-                                <tr>
-                                    <td>Cell Content 1</td>
-                                    <td>Cell Content 2</td>
-                                    <td>Cell Content 3</td>
-<td>Cell Content 4</td>
-<td>Cell Content 5</td>
-                                </tr> 
-                                <tr>
-                                    <td>Cell Content 1</td>
-                                    <td>Cell Content 2</td>
-                                    <td>Cell Content 3</td>
-<td>Cell Content 4</td>
-<td>Cell Content 5</td>
-
-                                </tr> 
-                                <tr>
-                                    <td>Cell Content 1</td>
-                                    <td>Cell Content 2</td>
-                                    <td>Cell Content 3</td>
-<td>Cell Content 4</td>
-<td>Cell Content 5</td>
-
-                                </tr> 
-                                <tr>
-                                    <td>Cell Content 1</td>
-                                    <td>Cell Content 2</td>
-                                    <td>Cell Content 3</td>
-<td>Cell Content 4</td>
-<td>Cell Content 5</td>
-                                </tr> 
-                                <tr>
-                                    <td>Cell Content 1</td>
-                                    <td>Cell Content 2</td>
-                                    <td>Cell Content 3</td>
-<td>Cell Content 4</td>
-<td>Cell Content 5</td>
-
-                                </tr> 
-                                <tr>
-                                    <td>Cell Content 1</td>
-                                    <td>Cell Content 2</td>
-                                    <td>Cell Content 3</td>
-<td>Cell Content 4</td>
-<td>Cell Content 5</td>
-                                </tr> 
-                                <tr>
-                                    <td>Cell Content 1</td>
-                                    <td>Cell Content 2</td>
-                                    <td>Cell Content 3</td>
-<td>Cell Content 4</td>
-<td>Cell Content 5</td>
-                                </tr> 
-                                <tr>
-                                    <td>Cell Content 1</td>
-                                    <td>Cell Content 2</td>
-                                    <td>Cell Content 3</td>
-<td>Cell Content 4</td>
-<td>Cell Content 5</td>
- 
-                                </tr> 
-                                <tr>
-                                    <td>Cell Content 1</td>
-                                    <td>Cell Content 2</td>
-                                    <td>Cell Content 3</td>
-<td>Cell Content 4</td>
-<td>Cell Content 5</td>
- 
-                                </tr> 
-                                <tr>
-                                    <td>Cell Content 1</td>
-                                    <td>Cell Content 2</td>
-                                    <td>Cell Content 3</td>
-<td>Cell Content 4</td>
-<td>Cell Content 5</td>
- 
-                                </tr> 
-                                <tr>
-                                    <td>Cell Content 1</td>
-                                    <td>Cell Content 2</td>
-                                    <td>Cell Content 3</td>
-<td>Cell Content 4</td>
-<td>Cell Content 5</td>
- 
-                                </tr> 
+                            <tbody class="scrollContent" style="overflow-y:auto;">
+                      
                             </tbody>
                         </table>
                     </div>
 
 
-
+                    <!--
                     <div class="recentsExecutions">
                         <div class="cardHeader">
                             <h2>Recientes</h2>
@@ -394,8 +281,7 @@
                                 </tr>
                             </thead>
                             <tbody class="scrollContent">
-                                <tr>
-                                    <!--<td><span class="fecha"></span></td> preguntar a los chicos-->
+                                <tr>                                    
                                     <td>AQUÍ  FECHA</td>                                    
                                 </tr>
                                 <tr>                                   
@@ -453,8 +339,7 @@
                             </tbody>
                         </table>
                     </div>
-
-
+                    -->
                    
 
 
@@ -462,13 +347,12 @@
 
                 
 
-
             </div>
 
         </div>
 
         <script>
-            function toggleMenu(){
+           /* function toggleMenu(){
                 let toggle = document.querySelector('.toggle');
                 let navigation = document.querySelector('.navigation');
                 let main = document.querySelector('.main');
@@ -477,7 +361,7 @@
                 navigation.classList.toggle('active');
                 main.classList.toggle('active');
             } 
-
+            */
             var count = 0, count2 = 0;
 
             function buttonOn(color){
