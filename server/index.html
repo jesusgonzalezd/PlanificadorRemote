@@ -96,9 +96,28 @@
                         </div>
                     </div>
 
+                    <div class="card">
+                        <div>
+                            <div class="cardNameC">Control remoto</div>
+                            <button id="action_1" onclick="buttonOn(1)" type="button" class="btn btn-outline-primary">Fan Cooler</button>
+                        </div>
+                        <div class="iconBox">
+                            <i class="fa fa-snowflake-o" aria-hidden="true"></i>
+                        </div>
+                    </div>                  
+
+                    <div class="card">
+                        <div>
+                            <div class="cardNameC">Control remoto</div>
+                            <button id="action_2" onclick="button2On(1)" type="button" class="btn btn-outline-primary">Alarma</button>
+                        </div>
+                        <div class="iconBox">
+                            <i class="fa fa-bell" aria-hidden="true"></i>
+                        </div>
+                    </div>
+
+
                     
-
-
                 </div>
 
                 <div class="details">
@@ -233,25 +252,25 @@
                     </div>                        
                     </div>
 
-
+                    <!--
                     <div class="remoteControl">
                         <div class="cardHeader">
                             <h2>Control remoto</h2>                            
                         </div>
                         <div>
-                            <button id="action_1" onclick="buttonOn(1)" type="button" class="btn btn-outline-primary">Accion 1</button>
+                            <button id="action_1" onclick="buttonOn(1)" type="button" class="btn btn-outline-primary">Fan Cooler</button>
                             
-                            <button id="action_2" onclick="button2On(1)" type="button" class="btn btn-outline-primary">Accion 2</button>
+                            <button id="action_2" onclick="button2On(1)" type="button" class="btn btn-outline-primary">Alarma</button>
                             
                         </div>
                     </div>
-
+                    -->
  
-                    <div class="historialVariables" style="overflow-y:auto;"> 
+                    <div class="historialVariables" > 
                         <div class="cardHeader">
                             <h2>Registro de variables</h2>                            
                         </div>
-                        <table id="historialVariableTable" class="historialT" style="overflow-y:auto;"> 
+                        <table id="historialVariableTable" class="historialT" > 
                             <thead class="fixedHeader">
                                 <tr class="paddingBetweenCols">
                                     <td>Output</td>                                                              
@@ -261,13 +280,8 @@
                                     <td>Tiempo</td>
                                 </tr>
                             </thead>
-<<<<<<< Updated upstream
-                            <tbody class="scrollContent" style="overflow-y:auto;">
-                      
-=======
                             <tbody class="scrollContent">
                                 
->>>>>>> Stashed changes
                             </tbody>
                         </table>
                     </div>
