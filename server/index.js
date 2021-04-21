@@ -62,6 +62,12 @@ parser.on('data', function(data) {
         tiempo: time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds()
     });
     
+    db.ref("interventions").orderByKey().limitToLast(1)
+    .once("child_added", function (snapshot){
+        if(snapshot.val().status) port.write('1');
+        else port.write('0');
+    });
+
     //io.emit('arduino:data', data);
 });
 
