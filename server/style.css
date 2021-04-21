@@ -258,11 +258,30 @@ body{
     margin-top: 50px;
     padding: 20px;    
 }
-/*
+
 .details .remoteControl{
     position: relative;
     display: grid;
-    min-height: 530px;
+    min-height: 50px;
     background: #fff;
     padding: 20px;
-}*/
+}
+button{
+    position: relative;
+    padding: 10px, 20px;
+    margin: 5px;
+    background-color: rgb(180, 178, 178);
+    color: #fff;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+.remoteControl .btn{
+    position:relative;
+    background:  rgb(180, 178, 178);
+    border:black;
+    border-width: 0.5em;
+    color:black;
+}

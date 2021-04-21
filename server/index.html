@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>
+        
         <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
         <title>Arduino Dashboard</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="style.css">
+        <!-- CSS only -->
+       
       <!--  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
         -->
         <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase.js"></script>
@@ -234,7 +237,12 @@
                         <div class="cardHeader">
                             <h2>Control remoto</h2>                            
                         </div>
-
+                        <div>
+                            <button id="action_1" onclick="buttonOn(1)" type="button" class="btn btn-outline-primary">Accion 1</button>
+                            
+                            <button id="action_2" onclick="button2On(1)" type="button" class="btn btn-outline-primary">Accion 2</button>
+                            
+                        </div>
                     </div>
 
  
@@ -331,6 +339,42 @@
                 navigation.classList.toggle('active');
                 main.classList.toggle('active');
             } 
+
+            var count = 0, count2 = 0;
+
+            function buttonOn(color){
+                               
+                if(color == 1){
+                    count+=1; 
+                }
+
+                if(count == 1){
+                    document.getElementById("action_1").style.background = "#03a9f4";
+                }
+                else if(count == 2){
+                    document.getElementById("action_1").style.background = "rgb(180, 178, 178)";
+                    count = 0;
+                }       
+            
+            }
+
+            function button2On(color){
+                               
+                if(color == 1){
+                    count2+=1; 
+                }
+               
+                if(count2 == 1){
+                    document.getElementById("action_2").style.background = "#03a9f4";
+                }
+                else if(count2 == 2){
+                    document.getElementById("action_2").style.background = "rgb(180, 178, 178)";
+                    count2 = 0;
+                }       
+ 
+                }
+            
+
         </script> 
     </body>
 </html>
