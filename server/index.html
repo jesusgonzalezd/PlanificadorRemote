@@ -384,33 +384,57 @@
             var count = 0, count2 = 0;
 
             function buttonOn(color){
-                               
+                             
+                var time = new Date();
+
                 if(color == 1){
                     count+=1; 
                 }
 
                 if(count == 1){
                     document.getElementById("action_1").style.background = "#03a9f4";
+                    firebase.database().ref("interventionsFAN").push({
+                            status: true,
+                            fecha: time.getDate() + "/" + (time.getMonth() + 1) + "/" + time.getFullYear(), 
+                            tiempo: time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds()
+                    });
                 }
                 else if(count == 2){
                     document.getElementById("action_1").style.background = "rgb(180, 178, 178)";
                     count = 0;
+                    firebase.database().ref("interventionsFAN").push({
+                            status: false,
+                            fecha: time.getDate() + "/" + (time.getMonth() + 1) + "/" + time.getFullYear(), 
+                            tiempo: time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds()
+                    });
                 }       
             
             }
 
             function button2On(color){
-                               
+                              
+                var time = new Date();
+
                 if(color == 1){
                     count2+=1; 
                 }
                
                 if(count2 == 1){
                     document.getElementById("action_2").style.background = "#03a9f4";
+                    firebase.database().ref("interventionsAlarm").push({
+                            status: true,
+                            fecha: time.getDate() + "/" + (time.getMonth() + 1) + "/" + time.getFullYear(), 
+                            tiempo: time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds()
+                    });
                 }
                 else if(count2 == 2){
                     document.getElementById("action_2").style.background = "rgb(180, 178, 178)";
                     count2 = 0;
+                    firebase.database().ref("interventionsAlarm").push({
+                            status: false,
+                            fecha: time.getDate() + "/" + (time.getMonth() + 1) + "/" + time.getFullYear(), 
+                            tiempo: time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds()
+                    });
                 }       
  
                 }
